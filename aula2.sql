@@ -1,0 +1,46 @@
+CREATE TABLE DEPARTAMENTO
+(
+    Dnome VARCHAR(20) NOT NULL,
+    Dnumero INT NOT NULL,
+    PRIMARY KEY(Dnumero),
+    UNIQUE(Dnome),
+);
+
+CREATE TABLE FUNCIONARIO
+(
+    Pnome VARCHAR(20) NOT NULL,
+    Minicial CHAR,
+    Unome VARCHAR(20) NOT NULL,
+    Cpf VARCHAR(11) NOT NULL,
+    Datanasc DATE,
+    Endereco VARCHAR(40),
+    Sexo CHAR NOT NULL,
+    Salario DECIMAL(7,2) NOT NULL,
+    Cpf_supervisor VARCHAR(11),
+    Dnr INT,
+    PRIMARY KEY(Cpf),
+    FOREIGN KEY(Cpf_supervisor) REFERENCES FUNCIONARIO(Cpf),
+    FOREIGN KEY(Dnr) REFERENCES DEPARTAMENTO(Dnumero),
+);
+
+CREATE TABLE PROJETO
+(
+    Projnome VARCHAR(20) NOT NULL,
+    Projnumero INT NOT NULL,
+    Projlocal VARCHAR(20),
+    Dnum INT,
+    PRIMARY KEY(Projnumero),
+    FOREIGN KEY(Dnum) REFERENCES DEPARTAMENTO(Dnumero),
+);
+
+INSERT INTO DEPARTAMENTO VALUES('Pesquisa', 5);
+INSERT INTO DEPARTAMENTO VALUES('Administração', 4);
+INSERT INTO DEPARTAMENTO VALUES('Matriz',  1);
+
+INSERT INTO FUNCIONARIO VALUES('Ronaldo', 'K', 'Lima','66688444476','1962-09-15','Rua Rebolças, 65, Piracicaba, SP','M', 38.00000, NULL, 5);
+INSERT INTO FUNCIONARIO VALUES('Alice', NULL, 'Zelaya','99988777767','1968-01-19','Rua Souza Lima, 35, Curitiba, PR','F', 25.00000, '66688444476', 4);
+INSERT INTO FUNCIONARIO VALUES('Fernando', 'T', 'Wong','33344455587','1955-12-08','Rua da Lapa, 751, São Paulo, SP','M', 30.00000, '66688444476', 5);
+
+INSERT INTO PROJETO VALUES('ProdutoX',1, 'Santo André', 5);
+INSERT INTO PROJETO VALUES('Informatização', 10, 'Mauá', 4);
+INSERT INTO PROJETO VALUES('Reorganização', 20, 'São Paulo', 1);
